@@ -85,4 +85,8 @@ class PlaceController extends Controller
         Place::destroy($id);
         return redirect(route('place.index'));
     }
+
+    public function comment(Request $request){
+
+    }
 }
