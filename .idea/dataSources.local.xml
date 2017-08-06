@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - jdbc:postgresql://ec2-23-23-227-188.compute-1.amazonaws.com :5432/dfjm91fafkvsim" uuid="ad3fbdbe-6c31-4ccc-b3ba-dc3393c2d616">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>hldmdpgppsjaaw</user-name>
+    </data-source>
+    <data-source name="PostgreSQL - postgres@localhost" uuid="f1e18bf9-bf3f-4b0a-a1fd-e3eb9b8dc2f1">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Sqlite (Xerial) - identifier.sqlite" uuid="7ed3d301-a6cb-4189-a9b6-adb71ec51910">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <auth-required>false</auth-required>
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Sqlite (Xerial) - database.sqlite" uuid="4a7b0e36-00ec-482d-99a3-afc6489bb28c">
+      <database-info product="SQLite" version="3.16.1" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <auth-required>false</auth-required>
+    </data-source>
+  </component>
+</project>
