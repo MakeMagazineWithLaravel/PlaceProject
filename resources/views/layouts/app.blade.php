@@ -83,5 +83,70 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script>
+        var $star_rating = $('.star-rating .fa');
+
+        var SetRatingStar = function() {
+            return $star_rating.each(function() {
+                if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                    return $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    return $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        };
+
+        $star_rating.on('click', function() {
+            $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+            return SetRatingStar();
+        });
+
+        SetRatingStar();
+        $(document).ready(function() {
+
+        });
+        var $star_rating1 = $('.star-rating1 .fa');
+
+        var SetRatingStar1 = function() {
+            return $star_rating1.each(function() {
+                if (parseInt($star_rating1.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                    return $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    return $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        };
+
+        $star_rating1.on('click', function() {
+            $star_rating1.siblings('input.rating-value').val($(this).data('rating'));
+            return SetRatingStar1();
+        });
+
+        SetRatingStar1();
+        $(document).ready(function() {
+
+        });
+
+        var $star_rating2 = $('.star-rating2 .fa');
+        var SetRatingStar2 = function() {
+            return $star_rating2.each(function() {
+                if (parseInt($star_rating2.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                    return $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    return $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        };
+
+        $star_rating2.on('click', function() {
+            $star_rating2.siblings('input.rating-value').val($(this).data('rating'));
+            return SetRatingStar2();
+        });
+
+        SetRatingStar2();
+        $(document).ready(function() {
+
+        });
+    </script>
 </body>
 </html>

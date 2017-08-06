@@ -20,7 +20,12 @@
                     </a>
                     <div class="caption">
                         <a href="{{ route('place.show',$place->id) }}">{{ $place->title }}</a><br>
-                        <span class="fa fa-star">star</span><br>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <br>
                         ({{ $place->reviews }} reviews)<br>
                         <span class="glyphicon glyphicon-camera"></span> photos
                     </div>

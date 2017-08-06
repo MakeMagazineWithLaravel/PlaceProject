@@ -1,7 +1,25 @@
 @extends('layouts/app')
 
 @section('content')
+    <style>
+        .star-rating {
+            line-height:32px;
+            font-size:1.25em;
+        }
+        .star-rating1 {
+            line-height:32px;
+            font-size:1.25em;
+        }
+        .star-rating2 {
+            line-height:32px;
+            font-size:1.25em;
+        }
 
+        .star-rating .fa-star{color: yellow;}
+        .star-rating1 .fa-star{color: yellow;}
+        .star-rating2 .fa-star{color: yellow;}
+
+    </style>
     <div class="container">
         <div class="row">
                 <div class="col-lg-12">
@@ -25,26 +43,53 @@
             <h3>Ratings</h3>
             <hr style="border-color: #000000">
             <h3>Reviews</h3>
-        <h3>Add review</h3>
+
         <div class="row">
             <form class="form-inline">
                 <div class="form-group">
-                    <div class="col-sm-10">
-                        <textarea name="text" class="form-control" rows="4" cols="160"></textarea>
+                    <label for="text"><h3>Add review</h3></label>
+                        <textarea name="text" id="text" class="form-control" rows="4" cols="160"></textarea>
+                </div>
+                <div class="row" style="margin: 20px">
+                <div class="form-group col-md-3">
+                    <div class="star-rating " id="exampleInputName2">
+                        <span class="">Quality of food: </span>
+                        <span class="fa fa-star-o" data-rating="1"></span>
+                        <span class="fa fa-star-o" data-rating="2"></span>
+                        <span class="fa fa-star-o" data-rating="3"></span>
+                        <span class="fa fa-star-o" data-rating="4"></span>
+                        <span class="fa fa-star-o" data-rating="5"></span>
+                        <input type="hidden" name="whatever1" class="rating-value" value="2.56">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="input-5" class="control-label">Rate This</label>
-                    <input id="input-5" name="input-5" class="rating-loading" data-show-clear="false" data-show-caption="true">
-
+                <div class="form-group col-md-3">
+                    <div class="star-rating1 " id="exampleInputName2">
+                        <span class="">Service quality: </span>
+                        <span class="fa fa-star-o" data-rating="1"></span>
+                        <span class="fa fa-star-o" data-rating="2"></span>
+                        <span class="fa fa-star-o" data-rating="3"></span>
+                        <span class="fa fa-star-o" data-rating="4"></span>
+                        <span class="fa fa-star-o" data-rating="5"></span>
+                        <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="star-rating2" id="exampleInputName2">
+                        <span class="">Interior: </span>
+                        <span class="fa fa-star-o" data-rating="1"></span>
+                        <span class="fa fa-star-o" data-rating="2"></span>
+                        <span class="fa fa-star-o" data-rating="3"></span>
+                        <span class="fa fa-star-o" data-rating="4"></span>
+                        <span class="fa fa-star-o" data-rating="5"></span>
+                        <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <button type="submit" class="btn btn-primary" style="float: right">Enter review</button>
+                </div>
                 </div>
             </form>
         </div>
-
     </div>
-    <script>
-        $(document).on('ready', function(){
-            $('#input-5').rating({clearCaption: 'No stars yet'});
-        });
-    </script>
+
 @endsection
