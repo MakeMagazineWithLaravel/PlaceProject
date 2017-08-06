@@ -40,12 +40,107 @@
             </h3>
             </div>
             <hr style="border-color: #000000">
-            <h3>Ratings</h3>
+            <div class="row">
+                <h3>Ratings</h3>
+                <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="star-rating3" id="exampleInputName2">
+                        <span class="">Overall: </span>
+                        @for($i = 0; $i < $data['over']; $i++)
+                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                        @endfor
+                        @for($i = 0; $i < 5 - $data['over'];$i++)
+                            <span class="fa fa-star-o" data-rating="{{ $i+$data['over']+1 }}"></span>
+                        @endfor
+
+                        <span>
+                            {{ $data['over'] }}
+                        </span>
+                    </div>
+                    <div class="star-rating3 " id="exampleInputName2">
+                        <span class="">Quality of food: </span>
+                        @for($i = 0; $i < $data['food']; $i++)
+                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                        @endfor
+                        @for($i = 0; $i < 5 - $data['food'];$i++)
+                            <span class="fa fa-star-o" data-rating="{{ $i+$data['food']+1 }}"></span>
+                        @endfor
+                        <span>
+                            {{ $data['food'] }}
+                        </span>
+                    </div>
+                    <div class="star-rating3 " id="exampleInputName2">
+                        <span class="">Service quality: </span>
+                        @for($i = 0; $i < $data['ser']; $i++)
+                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                        @endfor
+                        @for($i = 0; $i < 5 - $data['ser'];$i++)
+                            <span class="fa fa-star-o" data-rating="{{ $i+$data['ser']+1 }}"></span>
+                        @endfor
+
+                        <span>
+                            {{ $data['ser'] }}
+                        </span>
+                    </div>
+                    <div class="star-rating3" id="exampleInputName2">
+                        <span class="">Interior: </span>
+                        @for($i = 0; $i < $data['inter']; $i++)
+                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                        @endfor
+                        @for($i = 0; $i < 5 - $data['inter'];$i++)
+                            <span class="fa fa-star-o" data-rating="{{ $i+$data['inter']+1 }}"></span>
+                        @endfor
+
+                        <span>
+                            {{ $data['inter'] }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            </div>
             <hr style="border-color: #000000">
+        <div class="row">
             <h3>Reviews</h3>
+            @foreach($ratings as $rating)
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                <p>On {{ $rating->created_at }}, {{ $rating->user->name }} said: </p><br>
+                <p>{{ $rating->comment }}</p><br>
+                    <div class="star-rating3 " id="exampleInputName2">
+                        <span class="">Quality of food: </span>
+                        @for($i = 0; $i < $rating->q_of_food; $i++)
+                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                        @endfor
+                        @for($i = 0; $i < 5 - $rating->q_of_food;$i++)
+                            <span class="fa fa-star-o" data-rating="{{ $i+$rating->q_of_food+1 }}"></span>
+                        @endfor
+                    </div>
+                    <div class="star-rating3 " id="exampleInputName2">
+                        <span class="">Service quality: </span>
+                        @for($i = 0; $i < $rating->service_q; $i++)
+                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                        @endfor
+                        @for($i = 0; $i < 5 - $rating->service_q;$i++)
+                            <span class="fa fa-star-o" data-rating="{{ $i+$rating->service_q+1 }}"></span>
+                        @endfor
+                    </div>
+                    <div class="star-rating3" id="exampleInputName2">
+                        <span class="">Interior: </span>
+                        @for($i = 0; $i < $rating->interior; $i++)
+                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                        @endfor
+                        @for($i = 0; $i < 5 - $rating->interior;$i++)
+                            <span class="fa fa-star-o" data-rating="{{ $i+$rating->interior+1 }}"></span>
+                        @endfor
+                    </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
         <div class="row">
-            <form class="form" method="get" action="{{ route('place.comment') }}">
+            <form class="form" method="get" action="{{ route('place.comment',$place->id) }}">
+                {{ csrf_field() }}
                 <div class="form-group">
                     <label for="text"><h3>Add review</h3></label>
                     <textarea name="comment" id="text" class="form-control" rows="4" ></textarea>

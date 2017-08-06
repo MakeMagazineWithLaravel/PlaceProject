@@ -31,6 +31,6 @@ Route::get('place/edit/{id}',['as'=>'place.edit','uses'=>'PlaceController@edit']
 Route::get('place/delete/{id}',['as'=>'place.destroy','uses'=>'PlaceController@delete']);
 Route::post('place',['as'=>'place.store','uses'=>'PlaceController@store']);
 Route::post('place/{id}',['as'=>'place.update','uses'=>'PlaceController@update']);
-Route::get('place/comment',['as'=>'place.comment','uses'=>'PlaceController@comment']);
+Route::get('place/comment/{id}',['as'=>'place.comment','uses'=>'PlaceController@comment']);
 Route::post('place/add',['as'=>'image.add','uses'=>'ImageController@add']);
 

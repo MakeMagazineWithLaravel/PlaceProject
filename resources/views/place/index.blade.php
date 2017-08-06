@@ -20,12 +20,14 @@
                     </a>
                     <div class="caption">
                         <a href="{{ route('place.show',$place->id) }}">{{ $place->title }}</a><br>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <br>
+                        <div class="star-rating3" id="exampleInputName2">
+                            @for($i = 0; $i < $place->explain($place->id)['over']; $i++)
+                                <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                            @endfor
+                            @for($i = 0; $i < 5 - $place->explain($place->id)['over'];$i++)
+                                <span class="fa fa-star-o" data-rating="{{ $i+$place->explain($place->id)['over']+1 }}"></span>
+                            @endfor
+                        </div>
                         ({{ $place->reviews }} reviews)<br>
                         <span class="glyphicon glyphicon-camera"></span> photos
                     </div>

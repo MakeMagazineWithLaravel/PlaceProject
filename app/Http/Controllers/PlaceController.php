@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Place;
+use App\Rating;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,7 @@ class PlaceController extends Controller
             'categories_id' => $request['category'],
             'description' => $request['description'],
             'photo' => $fileName,
+            'user_id' => Auth::user()->id
         ]);
         $place->save();
         return redirect(route('place.index'));
@@ -50,7 +52,9 @@ class PlaceController extends Controller
         $place->reviews = $place->reviews+1;
         $place->save();
 
-        return view('place/show',compact('place'));
+        $ratings = Rating::all();
+        $data = $place->explain($id);
+        return view('place/show',compact('place','ratings','data'));
     }
     public function edit($id){
         $place = Place::find($id);
@@ -88,7 +92,15 @@ class PlaceController extends Controller
         return redirect(route('place.index'));
     }
 
-    public function comment(Request $request){
-        $user = Auth::user();
+    public function comment(Request $request,$id){
+        Rating::create([
+            'user_id' => Auth::user()->id,
+            'place_id' => $id,
+            'comment'=>$request['comment'],
+            'q_of_food' => $request['q_of_food'],
+            'service_q' => $request['service_q'],
+            'interior' => $request['interior']
+        ]);
+        return redirect(route('place.show',$id));
     }
 }
