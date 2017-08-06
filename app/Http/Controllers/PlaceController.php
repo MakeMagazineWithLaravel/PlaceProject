@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Place;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class PlaceController extends Controller
@@ -87,6 +89,6 @@ class PlaceController extends Controller
     }
 
     public function comment(Request $request){
-
+        $user = Auth::user();
     }
 }

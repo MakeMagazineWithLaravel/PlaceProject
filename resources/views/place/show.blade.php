@@ -48,7 +48,7 @@
             <form class="form" method="get" action="{{ route('place.comment') }}">
                 <div class="form-group">
                     <label for="text"><h3>Add review</h3></label>
-                    <textarea name="text" id="text" class="form-control" rows="4" ></textarea>
+                    <textarea name="comment" id="text" class="form-control" rows="4" ></textarea>
                 </div>
                 <div class="row" style="margin: 20px">
                 <div class="form-group col-md-3">
@@ -59,7 +59,7 @@
                         <span class="fa fa-star-o" data-rating="3"></span>
                         <span class="fa fa-star-o" data-rating="4"></span>
                         <span class="fa fa-star-o" data-rating="5"></span>
-                        <input type="hidden" name="q_of_food" class="rating-value" value="2.56">
+                        <input type="hidden" name="q_of_food" class="rating-value" value="2">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
@@ -70,7 +70,7 @@
                         <span class="fa fa-star-o" data-rating="3"></span>
                         <span class="fa fa-star-o" data-rating="4"></span>
                         <span class="fa fa-star-o" data-rating="5"></span>
-                        <input type="hidden" name="service_q" class="rating-value" value="2.56">
+                        <input type="hidden" name="service_q" class="rating-value" value="2">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
@@ -81,7 +81,7 @@
                         <span class="fa fa-star-o" data-rating="3"></span>
                         <span class="fa fa-star-o" data-rating="4"></span>
                         <span class="fa fa-star-o" data-rating="5"></span>
-                        <input type="hidden" name="interior" class="rating-value" value="2.56">
+                        <input type="hidden" name="interior" class="rating-value" value="2">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
