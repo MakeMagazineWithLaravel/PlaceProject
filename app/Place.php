@@ -8,7 +8,7 @@ class Place extends Model
 {
     public $table = 'places';
 
-    protected $fillable = ['title','categories_id','comment','photo','reviews','user_id'];
+    protected $fillable = ['title','categories_id','description','photo','reviews','user_id'];
 
     public function user(){
         return $this->belongsTo('App\User');

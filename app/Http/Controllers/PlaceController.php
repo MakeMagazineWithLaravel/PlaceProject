@@ -39,7 +39,7 @@ class PlaceController extends Controller
         $place = Place::create([
             'title' => $request['title'],
             'categories_id' => $request['category'],
-            'comment' => $request['description'],
+            'description' => $request['description'],
             'photo' => $fileName,
             'user_id' => Auth::user()->id
         ]);
