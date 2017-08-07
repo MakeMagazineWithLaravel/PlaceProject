@@ -13,7 +13,7 @@ class AddColumnUserTable extends Migration
     public function up()
     {
         Schema::table('places', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->default(1);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('Cascade');
         });
@@ -27,7 +27,7 @@ class AddColumnUserTable extends Migration
     public function down()
     {
         Schema::table('place', function (Blueprint $table) {
-            //
+            $table->dropColumn('user_id');
         });
     }
 }
