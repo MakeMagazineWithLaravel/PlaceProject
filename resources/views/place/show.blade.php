@@ -38,9 +38,6 @@
             <h3>
                 Gallery
             </h3>
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                    <img src="/files/60267.jpg" class="img img-responsive"/>
-                </div>
                 @foreach($place->image as $image)
                     <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
                         <img src="/images/{{ $image->name }}" class="img img-responsive"/>
