@@ -38,7 +38,15 @@
             <h3>
                 Gallery
             </h3>
-            </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                    <img src="/files/60267.jpg" class="img img-responsive"/>
+                </div>
+                @foreach($place->image as $image)
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                        <img src="/images/{{ $image->name }}" class="img img-responsive"/>
+                    </div>
+                @endforeach
+        </div>
             <hr style="border-color: #000000">
             <div class="row">
                 <h3>Ratings</h3>
@@ -182,6 +190,22 @@
                 <div class="form-group col-md-3">
                     <button type="submit" class="btn btn-primary" style="float: right">Enter review</button>
                 </div>
+                </div>
+            </form>
+        </div>
+        <hr style="border-color: #000000">
+        <div class="row">
+            <form method="post" action="{{ route('image.add',$place->id) }}" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <h3>Upload new photo</h3>
+                <div class="form-group">
+                    <label class="custom-file">
+                        <input type="file" id="file" class="custom-file-input" multiple  name="images[]">
+                        <span class="custom-file-control"></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </div>
             </form>
         </div>

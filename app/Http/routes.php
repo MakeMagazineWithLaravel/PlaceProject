@@ -32,5 +32,5 @@ Route::get('place/delete/{id}',['as'=>'place.destroy','uses'=>'PlaceController@d
 Route::post('place',['as'=>'place.store','uses'=>'PlaceController@store','middleware' => 'auth']);
 Route::post('place/{id}',['as'=>'place.update','uses'=>'PlaceController@update','middleware' => 'auth']);
 Route::get('place/comment/{id}',['as'=>'place.comment','uses'=>'PlaceController@comment','middleware' => 'auth']);
-Route::post('place/add',['as'=>'image.add','uses'=>'ImageController@add']);
+Route::post('place/add/{id}',['as'=>'image.add','uses'=>'ImageController@add','middleware'=>'auth']);
 
