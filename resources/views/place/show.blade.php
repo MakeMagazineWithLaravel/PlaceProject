@@ -101,7 +101,7 @@
             <hr style="border-color: #000000">
         <div class="row">
             <h3>Reviews</h3>
-            @foreach($ratings as $rating)
+            @foreach($place->rating as $rating)
                 <div class="panel panel-default">
                     <div class="panel-body">
                 <p>On {{ $rating->created_at }}, {{ $rating->user->name }} said: </p><br>

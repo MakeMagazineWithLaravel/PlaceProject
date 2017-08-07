@@ -40,10 +40,10 @@ class Place extends Model
         if ($food > 0) {
             $food = $food / $place->rating->count();
         }
-        else if ($ser > 0) {
+         if ($ser > 0) {
             $ser = $ser / $place->rating->count();
         }
-        else if ($inter > 0){
+        if ($inter > 0){
             $inter = $inter / $place->rating->count();
         }
 
