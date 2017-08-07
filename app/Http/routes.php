@@ -25,12 +25,12 @@ Route::get('categories/delete/{id}',['as'=>'categories.destroy','uses'=>'Categor
 Route::post('categories/update/{id}',['as'=>'categories.update','uses'=>'CategoriesController@update']);
 
 Route::get('place',['as'=>'place.index','uses'=>'PlaceController@index']);
-Route::get('place/create',['as'=>'place.create','uses'=>'PlaceController@create']);
+Route::get('place/create',['as'=>'place.create','uses'=>'PlaceController@create','middleware' => 'auth']);
 Route::get('place/show/{id}',['as'=>'place.show','uses'=>'PlaceController@show']);
-Route::get('place/edit/{id}',['as'=>'place.edit','uses'=>'PlaceController@edit']);
-Route::get('place/delete/{id}',['as'=>'place.destroy','uses'=>'PlaceController@delete']);
-Route::post('place',['as'=>'place.store','uses'=>'PlaceController@store']);
-Route::post('place/{id}',['as'=>'place.update','uses'=>'PlaceController@update']);
-Route::get('place/comment/{id}',['as'=>'place.comment','uses'=>'PlaceController@comment']);
+Route::get('place/edit/{id}',['as'=>'place.edit','uses'=>'PlaceController@edit','middleware' => 'auth']);
+Route::get('place/delete/{id}',['as'=>'place.destroy','uses'=>'PlaceController@delete','middleware' => 'auth']);
+Route::post('place',['as'=>'place.store','uses'=>'PlaceController@store','middleware' => 'auth']);
+Route::post('place/{id}',['as'=>'place.update','uses'=>'PlaceController@update','middleware' => 'auth']);
+Route::get('place/comment/{id}',['as'=>'place.comment','uses'=>'PlaceController@comment','middleware' => 'auth']);
 Route::post('place/add',['as'=>'image.add','uses'=>'ImageController@add']);
 
