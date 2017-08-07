@@ -34,6 +34,7 @@
                             </div>
                         </div>
             </div>
+        @if (!$place->image->isEmpty())
         <div class="row">
             <h3>
                 Gallery
@@ -44,6 +45,7 @@
                     </div>
                 @endforeach
         </div>
+        @endif
             <hr style="border-color: #000000">
             <div class="row">
                 <h3>Ratings</h3>
