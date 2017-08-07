@@ -37,10 +37,12 @@ class Place extends Model
             $ser += $rating->service_q;
             $inter += $rating->interior;
         }
-        $food = $food / $place->rating->count();
-        $ser = $ser / $place->rating->count();
-        $inter = $inter / $place->rating->count();
-        $over = ($food+$ser+$inter)/3;
+        if ($food > 0 && $ser > 0 && $inter > 0){
+            $food = $food / $place->rating->count();
+            $ser = $ser / $place->rating->count();
+            $inter = $inter / $place->rating->count();
+        }
+        $over = ($food + $ser + $inter)/3;
         $data = [
             'food' => round($food,2),
             'ser' => round($ser,2),
