@@ -11,7 +11,7 @@
                             Create category
                         </div>
                         <div class="panel-body">
-                            <form class="form-inline" method="post" action="{{ route('categories.store') }}">
+                            <form class="form-inline" method="post" action="{{ route('admin.categories.store') }}">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="name">Name: </label>

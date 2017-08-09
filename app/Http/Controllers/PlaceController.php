@@ -65,7 +65,6 @@ class PlaceController extends Controller
     public function update(Request $request,$id){
         $place = Place::find($id);
         if ($request->hasFile('photo')){
-            File::delete('files/'.$place->photo);
             $destinationPath = 'files'; // upload path
     //        $name = $request->file('photo')->getClientOriginalName();
             $extension = $request->file('photo')->getClientOriginalExtension(); // getting image extension
@@ -88,7 +87,9 @@ class PlaceController extends Controller
         return redirect(route('place.index'));
     }
     public function delete($id){
-        Place::destroy($id);
+        $place = Place::find($id);
+        File::delete('files/'.$place->photo);
+        $place->destroy($id);
         return redirect(route('place.index'));
     }
 
@@ -102,5 +103,13 @@ class PlaceController extends Controller
             'interior' => $request['interior']
         ]);
         return redirect(route('place.show',$id));
+    }
+
+    public function search(Request $request){
+        $word = '%'.$request['search'].'%';
+        $places = Place::where('title','LIKE',$word)
+            ->orWhere('description','LIKE',$word)->get();
+        $categories = Category::where('name','LIKE',$word)->get();
+        return view('place/search',compact('places','categories'));
     }
 }

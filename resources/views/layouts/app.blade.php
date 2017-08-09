@@ -69,8 +69,9 @@
                     @endif
                 </ul>
                 <ul class="nav navbar-nav navbar-right" style="margin-top: 7px">
-                    <form CLASS="form-horizontal" method="post" action="#" >
-                        <input class="form-control" style="width: 100%;position: relative;float: right" type="text" name="search" placeholder="Search. . .">
+                    <form CLASS="form-horizontal" method="get" action="{{ route('search') }}" >
+                        {{ csrf_field() }}
+                        <input class="form-control" style="width: 100%;position: relative;float: right" type="text" name="search" placeholder="Заведение. . .">
                     </form>
                 </ul>
             </div>
@@ -148,5 +149,7 @@
 
         });
     </script>
+
+    @yield('script')
 </body>
 </html>

@@ -20,17 +20,17 @@
         .star-rating2 .fa-star{color: yellow;}
 
     </style>
-    <div class="container">
+    <div class="container" id="body">
         <div class="row">
                 <div class="col-lg-12">
 
-                            <div class="col-md-7">
+                            <div class="col-md-8 col-sm-4 col-xs-5">
                                 <h3>{{ $place->title }}</h3>
                                 <b>{{ $place->category->name }} </b><br>
                                 {{ $place->description }}
                             </div>
-                            <div class="col-md-5">
-                                <img src="/files/{{ $place->photo }}" class="img img-responsive" style="height: 200px; width: auto; float: right;">
+                            <div class="col-md-4">
+                                <img src="/files/{{ $place->photo }}" class="img img-responsive img-thumbnail" style="height: 250px; width: auto; float: right;">
                             </div>
                         </div>
             </div>
@@ -39,10 +39,14 @@
             <h3>
                 Gallery
             </h3>
+            {{--<div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">--}}
+                {{--<img src="/files/{{ $place->photo }}" class="img img-responsive img-thumbnail">--}}
+            {{--</div>--}}
                 @foreach($place->image as $image)
                     <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                        <img src="/images/{{ $image->name }}" class="img img-responsive"/>
+                        <img src="/images/{{ $image->name }}" class="img img-responsive img-thumbnail" v-on:click="changeImage('/images/{{ $image->name }}',$event)"/>
                     </div>
+
                 @endforeach
         </div>
         @endif
@@ -109,39 +113,41 @@
         <div class="row">
             <h3>Reviews</h3>
             @foreach($place->rating as $rating)
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                <p>On {{ $rating->created_at }}, {{ $rating->user->name }} said: </p><br>
-                <p>{{ $rating->comment }}</p><br>
-                    <div class="star-rating3 " id="exampleInputName2">
-                        <span class="">Quality of food: </span>
-                        @for($i = 0; $i < $rating->q_of_food; $i++)
-                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
-                        @endfor
-                        @for($i = 0; $i < 5 - $rating->q_of_food;$i++)
-                            <span class="fa fa-star-o" data-rating="{{ $i+$rating->q_of_food+1 }}"></span>
-                        @endfor
+                @if($rating->accept)
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                    <p>On {{ $rating->created_at }}, {{ $rating->user->name }} said: </p><br>
+                    <p>{{ $rating->comment }}</p><br>
+                        <div class="star-rating3 " id="exampleInputName2">
+                            <span class="">Quality of food: </span>
+                            @for($i = 0; $i < $rating->q_of_food; $i++)
+                                <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                            @endfor
+                            @for($i = 0; $i < 5 - $rating->q_of_food;$i++)
+                                <span class="fa fa-star-o" data-rating="{{ $i+$rating->q_of_food+1 }}"></span>
+                            @endfor
+                        </div>
+                        <div class="star-rating3 " id="exampleInputName2">
+                            <span class="">Service quality: </span>
+                            @for($i = 0; $i < $rating->service_q; $i++)
+                                <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                            @endfor
+                            @for($i = 0; $i < 5 - $rating->service_q;$i++)
+                                <span class="fa fa-star-o" data-rating="{{ $i+$rating->service_q+1 }}"></span>
+                            @endfor
+                        </div>
+                        <div class="star-rating3" id="exampleInputName2">
+                            <span class="">Interior: </span>
+                            @for($i = 0; $i < $rating->interior; $i++)
+                                <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
+                            @endfor
+                            @for($i = 0; $i < 5 - $rating->interior;$i++)
+                                <span class="fa fa-star-o" data-rating="{{ $i+$rating->interior+1 }}"></span>
+                            @endfor
+                        </div>
+                        </div>
                     </div>
-                    <div class="star-rating3 " id="exampleInputName2">
-                        <span class="">Service quality: </span>
-                        @for($i = 0; $i < $rating->service_q; $i++)
-                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
-                        @endfor
-                        @for($i = 0; $i < 5 - $rating->service_q;$i++)
-                            <span class="fa fa-star-o" data-rating="{{ $i+$rating->service_q+1 }}"></span>
-                        @endfor
-                    </div>
-                    <div class="star-rating3" id="exampleInputName2">
-                        <span class="">Interior: </span>
-                        @for($i = 0; $i < $rating->interior; $i++)
-                            <span class="fa fa-star" data-rating="{{ $i+1 }}"></span>
-                        @endfor
-                        @for($i = 0; $i < 5 - $rating->interior;$i++)
-                            <span class="fa fa-star-o" data-rating="{{ $i+$rating->interior+1 }}"></span>
-                        @endfor
-                    </div>
-                    </div>
-                </div>
+                @endif
             @endforeach
         </div>
 
@@ -192,6 +198,7 @@
                 </div>
             </form>
         </div>
+        <component :is="element"></component>
         <hr style="border-color: #000000">
         <div class="row">
             <form method="post" action="{{ route('image.add',$place->id) }}" enctype="multipart/form-data">
@@ -206,8 +213,42 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Upload</button>
                 </div>
+
             </form>
         </div>
     </div>
+    <div class="footer">
+        <div class="row">
+            <div class="">
 
+            </div>
+        </div>
+    </div>
+    <template id="square-template">
+        <p><span class="fa fa-star"></span> </p>
+    </template>
+
+@endsection
+@section('script')
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+       var a =  new Vue({
+            el: '#body',
+            data: {
+                image:'',
+                element:'square'
+            },
+           components:{
+               square: {
+                   template: '#square-template'
+               }
+           },
+            methods: {
+                changeImage: function (name,event){
+                  this.image = event.srcElement.src;
+                    console.log(event.srcElement.src)
+                }
+            }
+        });
+    </script>
 @endsection

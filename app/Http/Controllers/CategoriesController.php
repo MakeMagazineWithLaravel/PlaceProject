@@ -21,7 +21,7 @@ class CategoriesController extends Controller
     public function store(Request $request){
         $category = Category::create($request->all());
         $category->save();
-        return $this->index();
+        return redirect(route('admin.categories.index'));
     }
     public function show($id){
         $category = Category::find($id);
@@ -37,11 +37,11 @@ class CategoriesController extends Controller
     public function update(Request $request,$id){
         $category = Category::find($id);
         $category->update($request->all());
-        return $this->index();
+        return redirect(route('admin.categories.index'));
     }
 
     public function delete($id){
         Category::destroy($id);
-        return $this->index();
+        return redirect(route('admin.categories.index'));
     }
 }

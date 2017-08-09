@@ -8,7 +8,7 @@ class Rating extends Model
 {
     public $table = 'ratings';
 
-    protected $fillable = ['user_id','place_id','comment','q_of_food','service_q','interior'];
+    protected $fillable = ['user_id','place_id','comment','q_of_food','service_q','interior','accept'];
 
     public function user(){
         return $this->belongsTo('App\User');
