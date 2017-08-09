@@ -24,12 +24,12 @@
         <div class="row">
                 <div class="col-lg-12">
 
-                            <div class="col-md-8 col-sm-4 col-xs-5">
+                            <div class="col-md-7 col-sm-7 col-xs-12">
                                 <h3>{{ $place->title }}</h3>
                                 <b>{{ $place->category->name }} </b><br>
                                 {{ $place->description }}
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5 col-sm-5 col-xs-12">
                                 <img src="/files/{{ $place->photo }}" class="img img-responsive img-thumbnail" style="height: 250px; width: auto; float: right;">
                             </div>
                         </div>

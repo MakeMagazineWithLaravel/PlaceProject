@@ -15,7 +15,7 @@
                                 <tr>
                                     <th>Accept</th>
 
-                                    <th>Comment</th>
+                                    <th style="width: 350px">Comment</th>
 
                                     <th>User</th>
 
@@ -33,12 +33,12 @@
                                 <tr>
                                     <td>
                                         @if(!$comment->accept)
-                                            <a title="Неактивный" type="button" class="btn btn-default" href="{{ route('admin.comment.accept',$comment->id) }}">
-                                                <span class="fa fa-black-tie"></span>
+                                            <a title="Неактивный"   href="{{ route('admin.comment.accept',$comment->id) }}">
+                                                <span class="fa fa-square-o" style="margin-left: 20px; margin-top: 20px; "></span>
                                             </a>
                                         @else
-                                            <a title="Активный" type="button" class="btn btn-success" href="{{ route('admin.comment.accept',$comment->id) }}">
-                                                <span class="fa fa-black-tie"></span>
+                                            <a title="Активный" href="{{ route('admin.comment.accept',$comment->id) }}">
+                                                <span class="fa fa-check-square-o" style="margin-left: 20px; margin-top: 20px; "></span>
                                             </a>
                                         @endif
                                     </td>
