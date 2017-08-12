@@ -24,6 +24,9 @@ class Place extends Model
     public function rating(){
         return $this->hasMany('App\Rating','place_id')->orderBy('created_at','desc');
     }
+    public function ratingId($id){
+        return $this->hasOne('App\Rating','place_id')->find($id);
+    }
 
     public function explain($id)
     {

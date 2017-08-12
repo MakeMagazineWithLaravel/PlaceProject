@@ -9,7 +9,7 @@
 
                            <div class="thumbnail">
                             <a data-toggle="modal" data-target="#{{ $place->id }}1">
-                                <img src="/files/{{ $place->photo }}" class="img img-responsive">
+                                <img src="/files/{{ $place->photo }}" class="img img-responsive"  style="height: 200px; width: auto">
                             </a>
                             <div class="caption">
 
@@ -37,7 +37,7 @@
 
                             </div>
                             <div class="modal fade" id="{{ $place->id }}" tabindex="-1" role="dialog" aria-labelledby="favoritesModalLabel">
-                                <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-dialog modal-lg modal-md modal-sm" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close"
@@ -88,7 +88,7 @@
 
                     </div>
                 <div class="modal fade" id="{{ $place->id }}1" tabindex="-1" role="dialog" aria-labelledby="favoritesModalLabel1">
-                    <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-dialog modal-lg modal-md modal-sm" role="document">
                         <button type="button" class="close"
                                 data-dismiss="modal"
                                 aria-label="Close">

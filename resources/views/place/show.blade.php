@@ -30,9 +30,17 @@
                                 {{ $place->description }}
                             </div>
                             <div class="col-md-5 col-sm-5 col-xs-12">
-                                <img src="/files/{{ $place->photo }}" class="img img-responsive img-thumbnail" style="height: 250px; width: auto; float: right;">
+                                <a data-toggle="modal" data-target="#{{ $place->id }}1">
+                                    <img src="/files/{{ $place->photo }}" class="img img-responsive img-thumbnail" style="height: 250px; width: auto; float: right;">
+                                </a>
                             </div>
-                        </div>
+                </div>
+                @if (Auth::user() !== null and Auth::user()->place_id($place->id) !== null)
+                    <div class="">
+                        <a href="{{ route('place.edit',$place->id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('place.destroy',$place->id) }}" class="btn btn-danger">Delete</a>
+                    </div>
+                @endif
             </div>
         @if (!$place->image->isEmpty())
         <div class="row">
@@ -44,9 +52,26 @@
             {{--</div>--}}
                 @foreach($place->image as $image)
                     <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                        <img src="/images/{{ $image->name }}" class="img img-responsive img-thumbnail" v-on:click="changeImage('/images/{{ $image->name }}',$event)"/>
+                        <a data-toggle="modal" data-target="#{{ $image->id }}">
+                            <img src="/images/{{ $image->name }}" class="img img-responsive img-thumbnail"/>
+                            <div style="margin-top: 10px">
+                                @if (Auth::user() !== null and $image->user->id === Auth::user()->id)
+                                    <a href="{{ route('image.edit',$image->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('image.delete',$image->id) }}" class="btn btn-danger">Delete</a>
+                                @endif
+                            </div>
+                        </a>
                     </div>
+                <div class="modal fade" id="{{ $image->id }}" tabindex="-1" role="dialog" aria-labelledby="favoritesModalLabel1">
+                    <div class="modal-dialog modal-lg modal-md modal-sm" role="document">
+                        <button type="button" class="close"
+                                data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <img src="/images/{{ $image->name }}" class="img img-responsive">
 
+                    </div>
+                </div>
                 @endforeach
         </div>
         @endif
@@ -152,53 +177,104 @@
         </div>
 
         <div class="row">
-            <form class="form" method="get" action="{{ route('place.comment',$place->id) }}">
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="text"><h3>Add review</h3></label>
-                    <textarea name="comment" id="text" class="form-control" rows="4" ></textarea>
-                </div>
-                <div class="row" style="margin: 20px">
-                <div class="form-group col-md-3">
-                    <div class="star-rating " id="exampleInputName2">
-                        <span class="">Quality of food: </span>
-                        <span class="fa fa-star-o" data-rating="1"></span>
-                        <span class="fa fa-star-o" data-rating="2"></span>
-                        <span class="fa fa-star-o" data-rating="3"></span>
-                        <span class="fa fa-star-o" data-rating="4"></span>
-                        <span class="fa fa-star-o" data-rating="5"></span>
-                        <input type="hidden" name="q_of_food" class="rating-value" value="2">
+            @if(Auth::user() !== null and !Auth::user()->rating->isEmpty()  and Auth::user()->comment($place->id) !== null)
+                <form class="form" method="get" action="{{ route('place.comment.update',Auth::user()->comment($place->id)->id) }}">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="text"><h3>Add review</h3></label>
+
+                        <textarea name="comment" id="text" class="form-control" rows="4" >
+                                    {{ Auth::user()->comment($place->id)->comment }}
+                        </textarea>
                     </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <div class="star-rating1 " id="exampleInputName2">
-                        <span class="">Service quality: </span>
-                        <span class="fa fa-star-o" data-rating="1"></span>
-                        <span class="fa fa-star-o" data-rating="2"></span>
-                        <span class="fa fa-star-o" data-rating="3"></span>
-                        <span class="fa fa-star-o" data-rating="4"></span>
-                        <span class="fa fa-star-o" data-rating="5"></span>
-                        <input type="hidden" name="service_q" class="rating-value" value="2">
+                    <div class="row" style="margin: 20px">
+                    <div class="form-group col-md-3">
+                        <div class="star-rating " id="exampleInputName2">
+                            <span class="">Quality of food: </span>
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="q_of_food" class="rating-value" value="{{ Auth::user()->comment($place->id)->q_of_food }}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <div class="star-rating2" id="exampleInputName2">
-                        <span class="">Interior: </span>
-                        <span class="fa fa-star-o" data-rating="1"></span>
-                        <span class="fa fa-star-o" data-rating="2"></span>
-                        <span class="fa fa-star-o" data-rating="3"></span>
-                        <span class="fa fa-star-o" data-rating="4"></span>
-                        <span class="fa fa-star-o" data-rating="5"></span>
-                        <input type="hidden" name="interior" class="rating-value" value="2">
+                    <div class="form-group col-md-3">
+                        <div class="star-rating1 " id="exampleInputName2">
+                            <span class="">Service quality: </span>
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="service_q" class="rating-value" value="{{ Auth::user()->comment($place->id)->service_q }}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <button type="submit" class="btn btn-primary" style="float: right">Enter review</button>
-                </div>
-                </div>
-            </form>
+                    <div class="form-group col-md-3">
+                        <div class="star-rating2" id="exampleInputName2">
+                            <span class="">Interior: </span>
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="interior" class="rating-value" value="{{ Auth::user()->comment($place->id)->interior }}">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="submit" class="btn btn-danger" style="float: right">Update review</button>
+                    </div>
+                    </div>
+                </form>
+                @else
+                <form class="form" method="get" action="{{ route('place.comment',$place->id) }}">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="text"><h3>Add review</h3></label>
+
+                        <textarea name="comment" id="text" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <div class="row" style="margin: 20px">
+                        <div class="form-group col-md-3">
+                            <div class="star-rating " id="exampleInputName2">
+                                <span class="">Quality of food: </span>
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="2"></span>
+                                <span class="fa fa-star-o" data-rating="3"></span>
+                                <span class="fa fa-star-o" data-rating="4"></span>
+                                <span class="fa fa-star-o" data-rating="5"></span>
+                                <input type="hidden" name="q_of_food" class="rating-value" value="2">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="star-rating1 " id="exampleInputName2">
+                                <span class="">Service quality: </span>
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="2"></span>
+                                <span class="fa fa-star-o" data-rating="3"></span>
+                                <span class="fa fa-star-o" data-rating="4"></span>
+                                <span class="fa fa-star-o" data-rating="5"></span>
+                                <input type="hidden" name="service_q" class="rating-value" value="2">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="star-rating2" id="exampleInputName2">
+                                <span class="">Interior: </span>
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="2"></span>
+                                <span class="fa fa-star-o" data-rating="3"></span>
+                                <span class="fa fa-star-o" data-rating="4"></span>
+                                <span class="fa fa-star-o" data-rating="5"></span>
+                                <input type="hidden" name="interior" class="rating-value" value="2">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <button type="submit" class="btn btn-primary" style="float: right">Enter review</button>
+                        </div>
+                    </div>
+                </form>
+            @endif
         </div>
-        <component :is="element"></component>
         <hr style="border-color: #000000">
         <div class="row">
             <form method="post" action="{{ route('image.add',$place->id) }}" enctype="multipart/form-data">
@@ -206,7 +282,7 @@
                 <h3>Upload new photo</h3>
                 <div class="form-group">
                     <label class="custom-file">
-                        <input type="file" id="file" class="custom-file-input" multiple  name="images[]">
+                        <input type="file" id="file" class="custom-file-input" multiple  name="images[]" required>
                         <span class="custom-file-control"></span>
                     </label>
                 </div>
@@ -224,9 +300,16 @@
             </div>
         </div>
     </div>
-    <template id="square-template">
-        <p><span class="fa fa-star"></span> </p>
-    </template>
+    <div class="modal fade" id="{{ $place->id }}1" tabindex="-1" role="dialog" aria-labelledby="favoritesModalLabel1">
+        <div class="modal-dialog modal-lg modal-md modal-sm" role="document">
+            <button type="button" class="close"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            <img src="/files/{{ $place->photo }}" class="img img-responsive">
+
+        </div>
+    </div>
 
 @endsection
 @section('script')

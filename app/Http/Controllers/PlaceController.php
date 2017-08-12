@@ -44,7 +44,7 @@ class PlaceController extends Controller
             'user_id' => Auth::user()->id
         ]);
         $place->save();
-        return redirect(route('place.index'));
+        return redirect(route('place.show',$place->id));
     }
     public function show($id){
         $place = Place::find($id);
@@ -65,8 +65,10 @@ class PlaceController extends Controller
     public function update(Request $request,$id){
         $place = Place::find($id);
         if ($request->hasFile('photo')){
+            if ($request->file('photo') !== $place->photo){
+                File::delete('files/'.$place->photo);
+            }
             $destinationPath = 'files'; // upload path
-    //        $name = $request->file('photo')->getClientOriginalName();
             $extension = $request->file('photo')->getClientOriginalExtension(); // getting image extension
             $fileName = rand(11111, 99999) . '.' . $extension; // renameing image
             $request->file('photo')->move($destinationPath, $fileName); // uploading file to given path'
@@ -84,7 +86,7 @@ class PlaceController extends Controller
                 'description' => $request['description'],
             ]);
 
-        return redirect(route('place.index'));
+        return redirect(route('place.show',$id));
     }
     public function delete($id){
         $place = Place::find($id);
@@ -103,6 +105,16 @@ class PlaceController extends Controller
             'interior' => $request['interior']
         ]);
         return redirect(route('place.show',$id));
+    }
+    public function comment_update(Request $request,$id){
+        $rating = Rating::find($id);
+        $rating->update([
+            'comment' => $request['comment'],
+            'q_of_food' => $request['q_of_food'],
+            'service_q' => $request['service_q'],
+            'interior' => $request['interior']
+        ]);
+        return redirect(route('place.show',$rating->place->id));
     }
 
     public function search(Request $request){

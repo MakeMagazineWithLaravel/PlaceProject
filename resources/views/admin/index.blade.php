@@ -13,7 +13,7 @@
                         <div class="col-md-3 col-sm-4 col-xs-4">
                             <div class="thumbnail">
 
-                                <img src="/files/{{ $place->photo }}" class="img img-responsive">
+                                <img src="/files/{{ $place->photo }}" class="img img-responsive"  style="height: 200px; width: auto">
                                 <div class="caption">
                                     <h3>{{ $place->title }}</h3>
                                     <li><i>{{ $place->category->name }}</i></li>
@@ -68,12 +68,12 @@
                                     <tr>
                                         <td>
                                             @if(!$comment->accept)
-                                                <a title="Неактивный" type="button" class="btn btn-default" href="{{ route('admin.comment.accept',$comment->id) }}">
-                                                    <span class="fa fa-black-tie"></span>
+                                                <a title="Неактивный" type="button"  href="{{ route('admin.comment.accept',$comment->id) }}">
+                                                    <span class="fa fa-square-o"></span>
                                                 </a>
                                             @else
-                                                <a title="Активный" type="button" class="btn btn-success" href="{{ route('admin.comment.accept',$comment->id) }}">
-                                                    <span class="fa fa-black-tie"></span>
+                                                <a title="Активный" type="button" href="{{ route('admin.comment.accept',$comment->id) }}">
+                                                    <span class="fa fa-check-square-o"></span>
                                                 </a>
                                             @endif
                                         </td>

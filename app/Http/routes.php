@@ -30,7 +30,11 @@ Route::get('place/delete/{id}',['as'=>'place.destroy','uses'=>'PlaceController@d
 Route::post('place',['as'=>'place.store','uses'=>'PlaceController@store','middleware' => 'auth']);
 Route::post('place/{id}',['as'=>'place.update','uses'=>'PlaceController@update','middleware' => 'auth']);
 Route::get('place/comment/{id}',['as'=>'place.comment','uses'=>'PlaceController@comment','middleware' => 'auth']);
+Route::get('place/comment/{id}/update',['as'=>'place.comment.update','uses'=>'PlaceController@comment_update','middleware' => 'auth']);
 Route::post('place/show/{id}',['as'=>'image.add','uses'=>'ImageController@add','middleware'=>'auth']);
+Route::get('image/edit/{id}',['as'=>'image.edit','uses'=>'ImageController@edit','middleware'=>'auth']);
+Route::post('image/edit/{id}',['as'=>'image.update','uses'=>'ImageController@update','middleware'=>'auth']);
+Route::get('image/delete/{id}',['as'=>'image.delete','uses'=>'ImageController@delete','middleware'=>'auth']);
 Route::get('search',['as'=>'search','uses'=>'PlaceController@search']);
 
 Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
